@@ -88,3 +88,102 @@ role {
     };
 
 };
+
+
+__END__
+
+
+=head1 NAME
+
+MooseX::Role::DBIx::Connector - give your Moose class DBIx::Connector powers
+
+=head1 SYNOPSIS
+
+  package MyClass;
+  use Moose;
+  with 'MooseX::Role::DBIx::Connector';
+
+  package main;
+
+  my $c = MyClass->new(
+      db_dsn  => 'dbi:Pg:dbname=foo;host=bar',
+      db_user => 'mikey',
+      db_password => 'seekrit',
+      db_attrs => { Foo => 'Bar' },
+     );
+
+  $c->db_conn->dbh->selectall_arrayref( ... );
+
+  $c->db_conn->txn( fixup => sub { ... } );
+
+
+  # advanced
+
+  package BigClass;
+  use Moose;
+  with 'MooseX::Role::DBIx::Connector' => { connection_name => 'itchy'    };
+  with 'MooseX::Role::DBIx::Connector' => { connection_name => 'scratchy' };
+
+  package main;
+
+  my $c = BigClass->new(
+      itchy_dsn  => 'dbi:Pg:dbname=foo;host=bar',
+      itchy_user => 'mikey',
+      itchy_password => 'seekrit',
+
+      scratchy_dsn   => 'dbi:SQLite:dbname=somefile',
+     );
+
+  $c->itchy_conn->dbh->selectall_arrayref( ... );
+  $c->scratchy_conn->txn( fixup => sub { ... } );
+
+=head1 DESCRIPTION
+
+Generic parameterized Moose role to give your class accessors to
+manage one or more L<DBIx::Connector> connections.
+
+=head1 ROLE PARAMETERS
+
+=head1 connection_name
+
+Name for this connection, which is the prefix for all the generated
+accessors.  Default 'db', which means that you get the accessors
+C<db_dsn>, C<db_user>, C<db_password>, C<db_attrs>, and C<db_conn>.
+
+=head1 connection_description
+
+Plaintext description of this connection.  Only used in generating
+C<documentation> for each of the generated accessors.
+
+=head1 accessor_options
+
+Hashref of additional options to pass to the generated accessors, e.g.
+
+  package MyClass;
+  use Moose;
+  with 'MooseX::Role::DBIx::Connector' => {
+    connection_name  => 'itchy',
+    accessor_options => { 'itchy_dsn'  => [ traits => ['GetOpt'], ],
+                          'itchy_user' => [ default => 'minnie_the_moocher' ],
+                        }
+  };
+
+=head1 ATTRIBUTES
+
+=head2 (connection_name)_conn
+
+Get a L<DBIx::Connector> connection object for the given connection info.
+
+=head2 (connection_name)_dsn
+
+L<DBI> DSN for your connection.  Required.
+
+=head2 (connection_name)_user
+
+Username for the connection.
+
+=head2 (connection_name)_password
+
+=head2 (connection_name)_attrs
+
+
