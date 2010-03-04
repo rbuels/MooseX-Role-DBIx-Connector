@@ -191,4 +191,6 @@ Password for the connection.
 Hashref of L<DBI> attributes for the connection.  Passed to
 L<DBIx::Connector>, which passes them to L<DBI>'s connect()
 
+=head1 AUTHOR
 
+Robert Buels, <rmb32@cornell.edu>
