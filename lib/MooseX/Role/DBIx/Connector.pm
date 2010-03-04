@@ -117,7 +117,7 @@ MooseX::Role::DBIx::Connector - give your Moose class DBIx::Connector powers
   $c->db_conn->txn( fixup => sub { ... } );
 
 
-  # advanced
+  ### more advanced usage
 
   package BigClass;
   use Moose;
@@ -184,6 +184,11 @@ Username for the connection.
 
 =head2 (connection_name)_password
 
+Password for the connection.
+
 =head2 (connection_name)_attrs
+
+Hashref of L<DBI> attributes for the connection.  Passed to
+L<DBIx::Connector>, which passes them to L<DBI>'s connect()
 
 
