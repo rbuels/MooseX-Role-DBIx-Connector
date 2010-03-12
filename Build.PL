@@ -4,7 +4,6 @@ my $build = Module::Build->new(
     dist_name            => 'MooseX-Role-DBIx-Connector',
     dist_abstract        => 'Generic Moose parameterized role to give your class DBIx::Connector powers',
     license              => 'perl',
-    create_makefile_pl   => 'passthrough',
     recursive_test_files => 1,
     create_readme        => 1,
     create_license       => 1,
