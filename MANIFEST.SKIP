@@ -1,9 +1,9 @@
-^(?!script/|examples/|lib/|inc/|t/|Makefile.PL$|README$|MANIFEST$|Changes$|META.yml$)
 
-
+#!start included /crypt/rob/cpan-lib/lib/perl5/ExtUtils/MANIFEST.SKIP
 # Avoid version control files.
 \bRCS\b
 \bCVS\b
+\bSCCS\b
 ,v$
 \B\.svn\b
 \B\.git\b
@@ -11,45 +11,43 @@
 \b_darcs\b
 
 # Avoid Makemaker generated and utility files.
+\bMANIFEST\.bak
 \bMakefile$
-\bblib
+\bblib/
 \bMakeMaker-\d
+\bpm_to_blib\.ts$
 \bpm_to_blib$
-\bblibdirs$
-^MANIFEST\.SKIP$
-
-# for developers only :)
-^TODO$
-^Features_09$
+\bblibdirs\.ts$         # 6.18 through 6.25 generated this
 
 # Avoid Module::Build generated and utility files.
 \bBuild$
-\b_build
+\b_build/
 
 # Avoid temp and backup files.
 ~$
-\.tmp$
 \.old$
-\.bak$
-\..*?\.sw[po]$
 \#$
 \b\.#
+\.bak$
 
 # avoid OS X finder files
 \.DS_Store$
 
-# Don't ship the test db
-^t/var
+# Avoid Devel::Cover files.
+\bcover_db\b
+#!end included /crypt/rob/cpan-lib/lib/perl5/ExtUtils/MANIFEST.SKIP
 
-# Don't ship the last dist we built :)
-\.tar\.gz$
+# Avoid configuration metadata file
+^MYMETA\.
 
-# Skip maint stuff
-^maint/
+# Avoid Module::Build generated and utility files.
+\bBuild$
+\bBuild.bat$
+\b_build
+\bBuild.COM$
+\bBUILD.COM$
+\bbuild.com$
+^MANIFEST\.SKIP
 
-# Avoid patch remnants
-\.orig$
-\.rej$
-
-# Dont use Module::Build anymore
-^Build.PL$
+# Avoid archives of this distribution
+\bBio-Chado-Schema-[\d\.\_]+
