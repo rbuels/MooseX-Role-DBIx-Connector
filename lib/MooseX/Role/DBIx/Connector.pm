@@ -2,7 +2,7 @@ package MooseX::Role::DBIx::Connector;
 use MooseX::Role::Parameterized;
 use DBIx::Connector;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 $VERSION = eval $VERSION;
 
 
